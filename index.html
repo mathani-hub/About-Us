@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green For Sudan: Our Mission</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        /* Define the Inter font for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fbf8; /* Very light, calming background */
+            color: #1f2937;
+        }
+        /* Custom colors for Green For Sudan: Deep Green and Sandstone */
+        .gfs-green { background-color: #059669; } /* emerald-600 */
+        .gfs-sand { background-color: #fbbf24; } /* amber-400 */
+        .gfs-text-green { color: #059969; }
+        .gfs-border-green { border-color: #059669; }
+        .gfs-green-darker { background-color: #047857; } /* emerald-700 */
+
+        /* Custom CSS for Desktop Dropdown */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+            transform: translateY(-10px);
+        }
+
+        /* Mobile Menu Styling */
+        .mobile-menu-overlay {
+            z-index: 50; /* Above header */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+            padding-top: 5rem; /* Space for the header */
+        }
+        .mobile-menu-overlay.active {
+            transform: translateX(0);
+        }
+
+        /* Styling for the main content sections */
+        .gradient-overlay {
+            background: linear-gradient(180deg, rgba(4, 120, 87, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 1. HEADER / NAVIGATION MENU (STANDARDIZED COMPONENT) -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center h-16">
+            
+            <!-- Logo & Title (NOW ONLY TEXT) -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <!-- Removed: <img src="Untitled design_20250926_085303_0000.png" alt="Green For Sudan Logo" class="h-10 w-10 object-contain"> -->
+                <div class="leading-none">
+                    <h1 class="text-xl font-extrabold text-gray-900 tracking-tight">Green For Sudan</h1>
+                </div>
+            </a>
+            
+            <!-- Desktop Navigation Links (Hidden on mobile) -->
+            <nav class="hidden lg:flex space-x-2 xl:space-x-8 text-gray-700 uppercase text-sm h-full items-center">
+                
+                <a href="index.html" class="h-full flex items-center px-2 border-b-2 border-transparent hover:border-emerald-500 hover:text-emerald-700 transition duration-150">HOME</a>
+                
+                <!-- Active Page Link -->
+                <a href="about_us.html" class="h-full flex items-center px-2 border-b-2 border-emerald-500 text-emerald-700 transition duration-150">ABOUT US</a>
+                
+                <a href="our-team.html" class="h-full flex items-center px-2 border-b-2 border-transparent hover:border-emerald-500 hover:text-emerald-700 transition duration-150">OUR TEAM</a>
+                
+                <!-- Dropdown Menu for OUR PROGRAMS -->
+                <div class="dropdown h-full flex items-center relative">
+                    <button class="h-full flex items-center px-2 focus:outline-none border-b-2 border-transparent hover:border-emerald-500 hover:text-emerald-700 transition duration-150">
+                        OUR PROGRAMS 
+                        <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                    </button>
+                    <!-- Dropdown Content -->
+                    <div class="dropdown-menu absolute top-full left-1/2 transform -translate-x-1/2 mt-0 bg-white shadow-xl rounded-lg w-56 border border-gray-100 z-50 py-2">
+                        <a href="journal.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition duration-150">The Journal</a>
+                        <a href="https://share.google/tkJVFR182ymYXLiUX" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition duration-150">Stories to Tell</a>
+                        <a href="https://greenforsudan-youth-simulation.netlify.app/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-sm text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 transition duration-150">Capacity Building Program</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="h-full flex items-center px-2 border-b-2 border-transparent hover:border-emerald-500 hover:text-emerald-700 transition duration-150">GFS HUB</a>
+            </nav>
+            
+            <!-- Donate Button & Mobile Toggle -->
+            <div class="flex items-center space-x-4">
+                <!-- UPDATED: Desktop button text -->
+                <a href="#" class="hidden sm:block px-4 py-2 gfs-sand text-gray-900 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105 text-sm">
+                    PARTNER WITH US
+                </a>
+                <button id="mobile-menu-toggle" class="lg:hidden text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition duration-150">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay (STANDARDIZED COMPONENT) -->
+    <div id="mobile-menu" class="mobile-menu-overlay hidden lg:hidden">
+        <div class="container mx-auto px-4 py-3 flex justify-end items-center h-16 absolute top-0 left-0">
+            <button id="mobile-menu-close" class="text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition duration-150">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <nav class="flex flex-col space-y-3 px-8 mt-12">
+            <a href="index.html" class="py-3 text-2xl text-gray-900 border-b border-gray-200 hover:text-emerald-600">HOME</a>
+            
+            <a href="about_us.html" class="py-3 text-2xl text-emerald-600 border-b border-gray-200">ABOUT US</a>
+            
+            <a href="our-team.html" class="py-3 text-2xl text-gray-900 border-b border-gray-200 hover:text-emerald-600">OUR TEAM</a>
+            
+            <!-- Mobile Dropdown Toggle -->
+            <div class="w-full">
+                <button id="mobile-programs-toggle" class="py-3 w-full flex justify-between items-center text-2xl text-gray-900 border-b border-gray-200 focus:outline-none">
+                    OUR PROGRAMS
+                    <i data-lucide="chevron-down" id="mobile-chevron" class="w-6 h-6 transform transition duration-200"></i>
+                </button>
+                
+                <!-- Mobile Dropdown Content -->
+                <div id="mobile-programs-menu" class="hidden flex-col space-y-1 pl-4 py-2 bg-gray-50 rounded-b-lg">
+                    <a href="journal.html" class="block w-full py-2 text-xl text-gray-600 hover:text-emerald-600 border-l-4 border-emerald-300 pl-4">The Journal</a>
+                    <a href="https://share.google/tkJVFR182ymYXLiUX" target="_blank" rel="noopener noreferrer" class="block w-full py-2 text-xl text-gray-600 hover:text-emerald-600 border-l-4 border-emerald-300 pl-4">Stories to Tell</a>
+                    <a href="https://greenforsudan-youth-simulation.netlify.app/" target="_blank" rel="noopener noreferrer" class="block w-full py-2 text-xl text-gray-600 hover:text-emerald-600 border-l-4 border-emerald-300 pl-4">Capacity Building Program</a>
+                </div>
+            </div>
+
+            <a href="#" class="py-3 text-2xl text-gray-900 border-b border-gray-200 hover:text-emerald-600">GFS HUB</a>
+            
+            <!-- UPDATED: Mobile button text -->
+            <a href="#" class="mt-8 px-6 py-3 gfs-green text-white text-xl rounded-xl shadow-lg hover:bg-emerald-700 text-center transition duration-300">
+                PARTNER WITH US
+            </a>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT: MISSION & VISION -->
+    <main>
+        <!-- 2. Hero Section: The Urgency of Hope -->
+        <section id="hero" class="relative pt-20 pb-20 md:pt-32 md:pb-40 text-white overflow-hidden bg-emerald-700">
+            <!-- Background Gradient/Pattern -->
+            <div class="absolute inset-0 gradient-overlay"></div>
+            
+            <div class="container mx-auto px-4 relative z-10 text-center">
+                <p class="text-lg font-semibold text-emerald-200 mb-2 uppercase tracking-widest">
+                    Green For Sudan: Pioneering Science Communication for a Sustainable Sudan
+                </p>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                    Building Hope Through Knowledge
+                </h1>
+                <p class="text-xl md:text-2xl font-light max-w-4xl mx-auto text-emerald-50">
+                    Sudan stands at a crossroads — a nation rich in natural resources, human talent, and cultural resilience, yet deeply challenged by conflict, displacement, and environmental degradation.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. Core Belief/Mission -->
+        <section id="mission" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-5xl">
+                
+                <div class="grid md:grid-cols-2 gap-10 items-start">
+                    <!-- Left: Core Beliefs -->
+                    <div>
+                        <span class="text-sm font-bold uppercase tracking-widest gfs-text-green mb-2 block">Our Core Belief</span>
+                        <h2 class="text-4xl font-extrabold text-gray-900 mb-6">
+                            Environmental advocacy is a necessity for peace, recovery, and justice.
+                        </h2>
+                        <p class="text-gray-700 text-lg mb-6">
+                            Amid these struggles, the climate crisis intensifies droughts, floods, and food insecurity, threatening lives and livelihoods across the country. We recognize the urgency of this challenge.
+                        </p>
+                        <p class="text-gray-700 text-lg font-semibold border-l-4 border-gfs-sand pl-4 italic">
+                            At Green For Sudan (GFS), our mission is to amplify Sudanese voices through science communication — transforming complex environmental issues into stories and solutions that empower people and influence policy.
+                        </p>
+                    </div>
+
+                    <!-- Right: Empowerment Text -->
+                    <div>
+                        <span class="text-sm font-bold uppercase tracking-widest gfs-text-green mb-2 block">Our Focus</span>
+                        <h2 class="text-4xl font-extrabold text-gray-900 mb-6">
+                            Empowering Every Sudanese Voice
+                        </h2>
+                        <p class="text-gray-700 text-lg mb-6">
+                            At Green For Sudan, we believe that the key to overcoming our nation’s environmental and climate challenges lies in accessible scientific understanding.
+                        </p>
+                        <p class="text-gray-700 text-lg mb-6">
+                            Knowledge about our environment, natural resources, and sustainable practices is a fundamental right and a powerful tool for every citizen. Yet, this vital information often remains out of reach, limiting our ability to adapt, innovate, and build a resilient future.
+                        </p>
+                        <p class="text-gray-700 text-lg mb-6">
+                            Green For Sudan exists to change that. We strive to be the platform where complex scientific ideas are transformed into engaging, practical insights — created by and for Sudanese youth. Through our initiatives, we aim to nurture a generation of scientifically informed leaders who can design local solutions and champion sustainability.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Youth Empowerment Callout -->
+                <div class="mt-16 p-8 bg-emerald-50 rounded-xl shadow-inner border-t-8 border-gfs-green text-center">
+                    <p class="text-xl text-gray-800 italic font-semibold">
+                        You are not just the future — you are today’s innovators, problem-solvers, and changemakers. Empowering you with scientific literacy, connecting you to research, and amplifying your voices is the key to unlocking Sudan’s sustainable and peaceful future.
+                    </p>
+                    <p class="text-lg font-bold gfs-text-green mt-4">
+                        We believe in your potential — because Sudanese youth are unstoppable forces for good.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. Who We Work With -->
+        <section id="work-with" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-5xl text-center">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-8">
+                    Who We Work With
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Card 1: Displaced & Refugees -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-gfs-sand hover:shadow-xl transition duration-300">
+                        <i data-lucide="tent" class="w-8 h-8 gfs-text-green mb-3"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Displaced & Refugees</h3>
+                        <p class="text-gray-600 text-base">We are particularly committed to hearing from those who have experienced displacement and refugee life — empowering them to take adaptive action in vulnerable conditions.</p>
+                    </div>
+                    
+                    <!-- Card 2: Students & Innovators -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-emerald-500 hover:shadow-xl transition duration-300">
+                        <i data-lucide="graduation-cap" class="w-8 h-8 gfs-text-green mb-3"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Students & Innovators</h3>
+                        <p class="text-gray-600 text-base">We train young Sudanese to be science communicators, equipping them to lead discussions, create awareness, and design evidence-based local solutions.</p>
+                    </div>
+                    
+                    <!-- Card 3: Farmers & Communities -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-gfs-sand hover:shadow-xl transition duration-300">
+                        <i data-lucide="home" class="w-8 h-8 gfs-text-green mb-3"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Farmers & Communities</h3>
+                        <p class="text-gray-600 text-base">We bridge science and society, helping communities understand environmental challenges and apply local, evidence-based solutions that improve livelihoods and resilience.</p>
+                    </div>
+                </div>
+
+                <p class="text-lg text-gray-700 max-w-4xl mx-auto mt-12 italic">
+                    “From refugees to students, farmers, and urban youth — we see every Sudanese as a partner in building a sustainable future.”
+                </p>
+
+            </div>
+        </section>
+
+        <!-- 5. Vision, Strategic Goal, and CTA -->
+        <section id="vision" class="py-16 md:py-24 gfs-green-darker text-white">
+            <div class="container mx-auto px-4 max-w-4xl">
+                
+                <!-- Our Vision -->
+                <div class="mb-12 p-6 bg-emerald-700 rounded-xl shadow-inner border border-emerald-600 text-center">
+                    <i data-lucide="eye" class="w-10 h-10 mb-3 mx-auto text-emerald-200"></i>
+                    <h2 class="text-3xl font-extrabold mb-4 text-emerald-100">Our Vision</h2>
+                    <p class="text-xl font-light text-emerald-50">
+                        We envision a future where young Sudanese voices are not only heard but are at the forefront of climate innovation and environmental resilience. A Sudan where a shared understanding of science bridges divides and empowers communities, guiding them toward a harmonious and sustainable relationship with their environment.
+                    </p>
+                </div>
+
+                <!-- Strategic Goal - NEW CONTENT INSERTED HERE -->
+                <div class="mt-16 text-left border-t border-emerald-600 pt-8">
+                    <h2 class="text-3xl font-extrabold mb-6 text-white text-center">Our Strategic Goal</h2>
+                    <p class="text-xl font-light mb-8 text-emerald-100">To achieve our vision and fulfil our mission, we are focused on:</p>
+
+                    <h3 class="text-2xl font-bold text-gfs-sand mb-4">Fostering a New Generation of Science Communicators</h3>
+                    
+                    <!-- Why This Matters Block -->
+                    <div class="p-4 rounded-lg bg-emerald-700 mb-6">
+                        <h4 class="text-lg font-semibold text-emerald-200">Why This Matters:</h4>
+                        <p class="text-emerald-100">We believe that effective climate action begins with clear, compelling communication. By empowering young people to articulate environmental issues, we equip entire communities with the knowledge needed for informed decisions and collective action.</p>
+                    </div>
+                    
+                    <!-- How We're Achieving It List -->
+                    <h4 class="text-xl font-semibold text-white mb-3 mt-8">How We're Achieving It:</h4>
+                    <ul class="space-y-4 text-emerald-100 list-none pl-0">
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-gfs-sand mr-2 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold">Expand Our Editorial Board:</span> We are committed to training and mentoring a diverse team of young editors and writers to produce high-quality, scientifically accurate, and culturally relevant content.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-gfs-sand mr-2 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold">Lead Engaging Campaigns:</span> Through innovative digital initiatives, such as our "Climate Fact-Checker" campaign featuring our fictional character, Fatima, we make complex climate facts relatable, combat misinformation, and spark curiosity among our followers.
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-gfs-sand mr-2 mt-1 flex-shrink-0"></i>
+                            <div>
+                                <span class="font-semibold">Conduct Capacity-Building Program:</span> We have designed, hands-on programs focusing on climate science, advocacy, and building a strong cadre of youth leaders.
+                            </div>
+                        </li>
+                    </ul>
+                    
+                    <!-- Stories to Tell Section -->
+                    <div class="mt-12 p-6 rounded-xl bg-emerald-800 border border-gfs-sand text-left">
+                        <h3 class="text-2xl font-bold text-gfs-sand mb-3">Stories to Tell</h3>
+                        <p class="text-lg text-emerald-100 mb-4">To concretely demonstrate this commitment and empower diverse voices, we present "Stories to Tell".</p>
+                        <p class="text-lg text-emerald-100 mb-4">Through "Stories to Tell," we specifically mentor and amplify the voices of young Sudanese women, equipping them with the skills to document their unique resilience, innovation, and leadership in the face of environmental and humanitarian crises.</p>
+                        <p class="text-lg text-emerald-100 mb-6">This digital initiative focuses on transforming complex climate realities and conflict experiences into compelling, human-centred narratives.</p>
+                        <p class="text-lg font-semibold text-white mb-6">This special project directly showcases the power of science communication in advocating for impactful, gender-responsive solutions, turning lived experiences into a powerful testimony of resilience and a call for action.</p>
+                        <a href="https://share.google/tkJVFR182ymYXLiUX" target="_blank" rel="noopener noreferrer" class="text-gfs-sand font-bold text-lg hover:text-white transition duration-200 flex items-center">
+                            Read more about this special project 
+                            <i data-lucide="arrow-right" class="w-5 h-5 ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Strategic Goal -->
+
+                <div class="mt-16 text-center">
+                    <h2 class="text-3xl font-extrabold mb-4 text-white">Join Us</h2>
+                    <p class="text-xl mb-8 text-emerald-100">
+                        Together, we can transform awareness into action — and action into a resilient, sustainable Sudan.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                        <!-- Button 1: JOIN US (CTA from About Us content) UPDATED LINK -->
+                        <a href="https://forms.gle/kDQV6dwATyKMNvt16" target="_blank" rel="noopener noreferrer" class="px-8 py-4 gfs-green text-white font-extrabold text-lg rounded-xl shadow-lg hover:bg-emerald-700 transition duration-300 transform hover:scale-[1.05]">
+                            JOIN US
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- 6. Footer (MINIMALIST COMPONENT) -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm text-gray-400">© 2025 Green For Sudan. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide Icons and JS for Mobile Menu -->
+    <script>
+        lucide.createIcons();
+
+        // --- Mobile Menu Toggle Logic ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const programsToggle = document.getElementById('mobile-programs-toggle');
+        const programsMenu = document.getElementById('mobile-programs-menu');
+        const mobileChevron = document.getElementById('mobile-chevron');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                mobileMenu.classList.add('active');
+            });
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 400); 
+        });
+
+        // --- Mobile Programs Dropdown Logic ---
+        programsToggle.addEventListener('click', () => {
+            const isExpanded = programsMenu.classList.toggle('hidden');
+            if (isExpanded) {
+                mobileChevron.classList.remove('rotate-180');
+            } else {
+                mobileChevron.classList.add('rotate-180');
+            }
+        });
+        
+        // Close menu when any link is clicked on mobile (good UX)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuClose.click();
+            });
+        });
+    </script>
+</body>
+</html>
+
